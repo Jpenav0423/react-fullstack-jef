@@ -13,11 +13,11 @@ function Post() {
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
         setPostObject(response.data);
       });
-  });
 
-  axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+      axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
         setComments(response.data);
-      }, []);
+    });
+  }, []);
 
   const addComment = () => {
     axios.post("http://localhost:3001/comments", {commentBody: newComment , PostId: id}).then((response) => {
