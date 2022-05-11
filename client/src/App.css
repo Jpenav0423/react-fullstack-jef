@@ -119,6 +119,14 @@ span {
   margin-left: 20px;
   text-decoration: none;
   color: white;
+  cursor: pointer;
+}
+
+.navbar button {
+
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
 }
 
 /* INDIVIDUAL POST */
