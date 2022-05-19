@@ -5,9 +5,13 @@ import CreatePost from './pages/CreatePost';
 import Post from "./pages/Post";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
+import Profile from './pages/Profile';
+import PageNotFound from './pages/PageNotFound';
 import {AuthContext } from "./helpers/AuthContext";
 import {useState, useEffect} from "react";
 import axios from 'axios';
+
+
 
 function App() {
 
@@ -70,6 +74,8 @@ function App() {
             <Route path="/post/:id" exact element={<Post />}/>
             <Route path="/registration" exact element={<Registration />}/>
             <Route path="/login" exact element={<Login />}/>
+            <Route path="/profile/:id" exact element={<Profile />}/>
+            <Route path="*" exact element={<PageNotFound/>}/>
           </Routes>
         </Router> 
       </AuthContext.Provider> 
