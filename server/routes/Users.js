@@ -50,4 +50,3 @@ router.get("/basicinfo/:id", async (req, res) => {
 module.exports = router;
 
 
-// Te quedaste en el minuto 10:59
