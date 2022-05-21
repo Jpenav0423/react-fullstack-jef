@@ -42,8 +42,10 @@ function Login() {
           setPassword(event.target.value);
         }}
       />
+      <a>Forgot your password?</a>
 
       <button onClick={login}> Login </button>
+      
     </div>
   );
 }

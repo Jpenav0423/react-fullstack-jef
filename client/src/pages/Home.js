@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import {AuthContext}  from "../helpers/AuthContext";
 
 function Home() {
 
     const [listOfPosts, setListOfPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
+    const {authState} = useContext(AuthContext);
     let navigate = useNavigate();
 
     useEffect(() => {
+      if(!localStorage.getItem("accessToken")){
+        navigate("/login");
+      } else {
         axios.get("http://localhost:3001/posts", {
           headers: {accessToken: localStorage.getItem("accessToken") }
          }).then((response) => {
@@ -20,6 +25,7 @@ function Home() {
           })
         );
       });
+    }
  }, []);
 
       const likeAPost = (postId) => {
@@ -65,7 +71,9 @@ function Home() {
             navigate(`/post/${value.id}`);
             }}>{value.postText}</div>
           <div className="footer">
-            <div className="usernamefooter">{value.username} </div>
+            <div className="usernamefooter">
+              <Link to={`/profile/${value.UserId}`}>{value.username}</Link> 
+            </div>
             <div className="buttons">
             <ThumbUpIcon 
               onClick={() => {
@@ -87,3 +95,5 @@ function Home() {
 }
 
 export default Home
+
+//TE QUEDASTE EN EL MINUTO 3:20 / 29:21

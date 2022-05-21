@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { Comments } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddlewares");
-//const { ValidationError } = require('sequelize/types');
 
 router.get("/:postId", async (req, res) => {
     const postId = req.params.postId; 

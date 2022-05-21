@@ -1,25 +1,64 @@
-import React, { useEffect, useState } from 'react'
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState, useContext } from 'react'
+import {useParams, useNavigate} from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../helpers/AuthContext";
+
 
 function Profile() {
 
     let { id } = useParams();
+    let navigate = useNavigate();
     const [username, setUsername] = useState("");
+    const [listOfPosts, setListOfPosts] = useState([]);
+    const { authState } = useContext(AuthContext);
 
     useEffect(() => {
         axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
             setUsername(response.data.username);
         });
+
+        axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
+            setListOfPosts(response.data);
+        });
     }, []);
 
     return (
         <div className="profilePageContainer">
-            <div className="basicoInfo"> <h1>Username: {username} </h1></div>
-            <div className="listOfPosts"></div>
+            <div className="basicoInfo"> 
+                <h1>Username: {username} </h1>
+                    {authState.username === username && (
+                <button onClick={() => {
+                    navigate("/changepassword");
+                }}
+                >
+                Change Password
+                </button>
+            )}
+            </div>
+            <div className="listOfPosts">
+            {listOfPosts.map((value, key) => {
+       return ( 
+        <div key={key} className="post">
+          <div className="title"> {value.title} </div>
+          <div className="body" onClick={() => {
+            navigate(`/post/${value.id}`);
+            }}>{value.postText}</div>
+          <div className="footer">
+            <div className="usernamefooter">{value.username} </div>
+            <div className="buttons">
+            <label>{value.Likes.length}</label>
+           </div>
+          </div>
+         </div>
+       );
+      })} 
+            </div>
         </div>
     );
     }
     
 
 export default Profile
+
+//Me quuede en el minuto 19:11
+
