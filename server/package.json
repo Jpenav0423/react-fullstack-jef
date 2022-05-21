@@ -20,6 +20,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "react-git-info": "^2.0.1",
     "sequelize-cli": "^6.4.1"
   }
 }
